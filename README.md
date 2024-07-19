@@ -1,2 +1,1 @@
-# gamc
-GBIF API MIDS Calculator
+# GBIF API MIDS Calculator
