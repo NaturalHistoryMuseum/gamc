@@ -22,4 +22,4 @@ For more details, see https://github.com/tdwg/mids.
 ## What is this tool?
 
 Probably best to just check out the
-[about page](https://naturalhistorymuseum.github.io/gamc/) on the app.
+[about page](https://naturalhistorymuseum.github.io/gamc/about) on the app.
