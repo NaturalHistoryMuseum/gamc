@@ -12,7 +12,12 @@ import '@nhm-data/zoa/theme';
 const routes = [
   { path: '/', name: 'home', component: Home },
   { path: '/about', name: 'about', component: About },
-  { path: '/dashboard/:datasetKey?', name: 'dashboard', component: Dashboard },
+  {
+    path: '/dashboard/:datasetKey?',
+    name: 'dashboard',
+    component: Dashboard,
+    props: true,
+  },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ];
 

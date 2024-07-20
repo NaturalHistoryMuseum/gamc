@@ -73,8 +73,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed, onMounted, ref, watch, onActivated } from 'vue';
 import { getCount, getDataset } from '../lib/gbifApi.js';
 import { calculateCounts, getPerElementCounts } from '../lib/mids.js';
 import Spinner from '../components/Spinner.vue';
@@ -91,6 +90,7 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js';
+import { useRoute } from 'vue-router';
 
 ChartJS.register(
   Title,
@@ -101,8 +101,8 @@ ChartJS.register(
   LinearScale,
 );
 
-const route = useRoute();
-const datasetKey = ref(route.params.datasetKey);
+const { datasetKey } = defineProps(['datasetKey']);
+
 const dataset = ref({});
 const total = ref(0);
 const levelCounts = ref([]);
@@ -144,13 +144,13 @@ onMounted(async () => {
 async function load() {
   loading.value = true;
   // load the dataset info first
-  dataset.value = await getDataset(datasetKey.value);
+  dataset.value = await getDataset(datasetKey);
   // load the number of records in the dataset
-  total.value = await getCount(datasetKey.value);
+  total.value = await getCount(datasetKey);
   // calculate the level counts
-  levelCounts.value = await calculateCounts(datasetKey.value);
+  levelCounts.value = await calculateCounts(datasetKey);
   // calculate per level counts
-  elementCounts.value = await getPerElementCounts(datasetKey.value);
+  elementCounts.value = await getPerElementCounts(datasetKey);
   // indicate that loading is complete
   loading.value = false;
 }

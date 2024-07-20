@@ -1,7 +1,11 @@
 <template>
   <Nav class="h-16"></Nav>
   <main class="flex justify-center">
-    <RouterView></RouterView>
+    <RouterView v-slot="{ Component }">
+      <KeepAlive exclude="Home">
+        <component :is="Component" :key="$route.fullPath" />
+      </KeepAlive>
+    </RouterView>
   </main>
 </template>
 
