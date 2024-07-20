@@ -6,6 +6,7 @@
         type="search"
         placeholder="Choose a GBIF occurrence dataset..."
         v-model="search"
+        ref="searchInput"
       />
       <ul
         v-if="datasets.length > 0"
@@ -28,9 +29,10 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { searchDatasets } from '../lib/gbifApi.js';
 
+const searchInput = ref(null);
 const search = ref(null);
 const datasets = ref([]);
 
@@ -52,6 +54,10 @@ watch(search, async () => {
       key: result.key,
     }));
   }, 100);
+});
+
+onMounted(() => {
+  searchInput.value.focus();
 });
 </script>
 
