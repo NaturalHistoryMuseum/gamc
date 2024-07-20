@@ -123,13 +123,4 @@ import {
 const levels = [mids0Elements, mids1Elements, mids2Elements, mids3Elements];
 </script>
 
-<style scoped>
-a {
-  color: theme('colors.amber.500');
-}
-
-a:hover {
-  text-decoration-line: underline;
-  color: theme('colors.amber.400');
-}
-</style>
+<style scoped></style>

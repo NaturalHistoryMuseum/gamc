@@ -1,19 +1,19 @@
 <template>
   <div class="flex pl-2 gap-2 items-center bg-amber-100">
     <RouterLink
-      class="hover:border-b-2 border-b-amber-400 h-full py-5 px-4"
+      class="no-link hover:border-b-2 border-b-amber-400 h-full py-5 px-4"
       :to="{ name: 'home' }"
     >
       Home
     </RouterLink>
     <RouterLink
-      class="hover:border-b-2 border-b-amber-400 h-full py-5 px-4"
+      class="no-link hover:border-b-2 border-b-amber-400 h-full py-5 px-4"
       :to="{ name: 'about' }"
     >
       About
     </RouterLink>
     <a
-      class="hover:border-b-2 border-b-amber-400 h-full py-5 px-4"
+      class="no-link hover:border-b-2 border-b-amber-400 h-full py-5 px-4"
       href="https://www.tdwg.org/community/cd/mids/"
       target="_blank"
     >

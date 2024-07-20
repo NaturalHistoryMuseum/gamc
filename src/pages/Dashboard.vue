@@ -11,6 +11,7 @@
         <div class="flex items-center gap-2">
           <div class="text-3xl font-bold hover:underline">
             <a
+              class="no-link"
               :href="`https://www.gbif.org/dataset/${datasetKey}`"
               target="_blank"
             >
@@ -18,12 +19,40 @@
             </a>
           </div>
         </div>
-        <button
-          @click="load"
-          class="bg-amber-300 hover:bg-amber-400 p-2 font-bold rounded-lg"
-        >
-          Refresh
-        </button>
+        <div class="flex gap-2">
+          <ZoaModal class="z-10" :buttonArgs="{ kind: 'primary' }">
+            <template v-slot:button>
+              <FontAwesomeIcon :icon="faQuestion"></FontAwesomeIcon>
+              Help
+            </template>
+            <template v-slot:header>Help</template>
+            <div class="flex flex-col gap-4">
+              <div>
+                The chart on the left shows the number of records in this
+                dataset that achieve each MIDS level. For a record to achieve a
+                level it must also achieve all previous levels. The highest MIDS
+                level met by all records in the dataset sets the MIDS level for
+                the entire dataset.
+              </div>
+              <div>
+                The chart on the right shows the number of records in this
+                dataset which meet the requirements of each MIDS element. This
+                is purely for investigative purposes and shows where each the
+                dataset is lacking the required data to make a MIDS level.
+              </div>
+              <div>
+                For more information about how these charts are created, check
+                out the
+                <RouterLink :to="{ name: 'about' }">about</RouterLink>
+                page.
+              </div>
+            </div>
+          </ZoaModal>
+          <ZoaButton kind="primary" @click="load">
+            <FontAwesomeIcon :icon="faRefresh"></FontAwesomeIcon>
+            Refresh
+          </ZoaButton>
+        </div>
       </div>
       <div class="flex-none text-xl px-2">
         <span class="pr-2 border-r-2 border-black italic"
@@ -49,6 +78,9 @@ import { useRoute } from 'vue-router';
 import { getCount, getDataset } from '../lib/gbifApi.js';
 import { calculateCounts, getPerElementCounts } from '../lib/mids.js';
 import Spinner from '../components/Spinner.vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faRefresh, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { ZoaButton, ZoaModal } from '@nhm-data/zoa';
 import { Bar } from 'vue-chartjs';
 import {
   Chart as ChartJS,
@@ -181,6 +213,8 @@ const perElementData = computed(() => {
     ],
   };
 });
+
+function showHelp() {}
 </script>
 
 <style scoped></style>

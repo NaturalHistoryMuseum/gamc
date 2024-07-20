@@ -11,4 +11,25 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --zoa-palette-primary: theme('colors.amber.300');
+  --zoa-palette-primary-b: theme('colors.amber.400');
+  --zoa-palette-secondary: theme('colors.gray.100');
+  --zoa-palette-secondary-b: theme('colors.gray.200');
+  /*--zoa-palette-tertiary: theme('colors.sky.300');*/
+  /*--zoa-palette-tertiary-b: theme('colors.sky.400')*/
+}
+
+a {
+  color: theme('colors.amber.500');
+}
+
+a:hover {
+  text-decoration-line: underline;
+  color: theme('colors.amber.400');
+}
+
+a.no-link {
+  color: black;
+  text-decoration-line: none;
 }
