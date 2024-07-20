@@ -26,10 +26,10 @@ export async function getCount(datasetKey, predicate = null) {
   return response.data.count;
 }
 
-export async function searchDatasets(search) {
+export async function searchDatasets(search, limit = 10) {
   const url = 'https://api.gbif.org/v1/dataset/suggest';
   const params = {
-    limit: 20,
+    limit: limit,
     type: 'OCCURRENCE',
     q: search,
   };
