@@ -13,11 +13,13 @@
           <a href="https://gbif.org">GBIF</a>.
         </p>
         <p>
-          The goal of this tool is to make it easy for anyone to check the MIDS
-          level on their GBIF dataset without having to download data or run
-          specialist software on their computer. However, if you would like to
-          get a more accurate* and feature-full breakdown of a dataset's MIDS
-          level, the excellent
+          The goal of this tool is to make it easy for anyone to check the
+          current MIDS level of their GBIF dataset without having to download
+          the data themselves or run specialist software on their computer.
+        </p>
+        <p>
+          If you would like to get a more accurate* and feature-full breakdown
+          of a dataset's MIDS level, the excellent
           <a href="https://github.com/AgentschapPlantentuinMeise/MIDSCalculator"
             >MIDS Calculator</a
           >
@@ -29,16 +31,22 @@
         <h2 class="text-xl font-bold">What is MIDS?</h2>
         <p>
           MIDS is the Minimum Information about a Digital Specimen, a standard
-          under construction by
+          under construction by the
           <a href="https://www.tdwg.org">TDWG</a>
-          in the MIDS task group.
+          MIDS task group.
         </p>
         <p>
-          At its core, MIDS is a method of measuring, in a machine actionable
-          way, the completeness of a digital specimen against a defined set of
-          expectations. MIDS defines the expectations and what they mean. MIDS
-          is a measure of completeness against a prescribed set of fields, not a
-          measure of the quality of the data in those fields.
+          At its core, MIDS is a specification for measuring, in a machine
+          actionable way, the digitisation status of a digital specimen against
+          a set of levels. MIDS defines these levels (0, 1, 2, and 3) as well as
+          the information elements that make up these levels. Each information
+          element is made up of a logical combination of one or more fields
+          which must be present in the record. If all the requirements of each
+          information element in a level is met by a record, it has met that
+          MIDS level. To meet the requirements of a higher MIDS level, all
+          previous MIDS levels must also be met. MIDS is a measure of a record's
+          completeness, not a measure of the quality of the data in those
+          fields.
         </p>
       </section>
       <section class="py-4">
