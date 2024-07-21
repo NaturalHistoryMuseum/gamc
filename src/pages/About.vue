@@ -121,7 +121,7 @@
         <p>
           If you think you've spotted something incorrect or would like to
           suggest an improvement, please do so on
-          <a href="https://github.com/NaturalHistoryMuseum/gamc/issue"
+          <a href="https://github.com/NaturalHistoryMuseum/gamc/issues"
             >GitHub</a
           >
           by creating an issue or opening a pull request.
