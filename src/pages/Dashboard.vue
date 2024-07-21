@@ -62,10 +62,10 @@
       </div>
       <div class="grow flex flex-col xl:flex-row gap-2">
         <div class="w-full xl:w-5/12 relative p-12">
-          <Bar :options="chartOptions" :data="chartData" />
+          <Bar :options="chartOptions" :data="levelChartData" />
         </div>
         <div class="w-full xl:w-7/12 relative p-12">
-          <Bar :options="chartOptions" :data="perElementData" />
+          <Bar :options="chartOptions" :data="elementChartData" />
         </div>
       </div>
     </div>
@@ -73,24 +73,23 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch, onActivated } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { getCount, getDataset } from '../lib/gbifApi.js';
 import { calculateCounts, getPerElementCounts } from '../lib/mids.js';
 import Spinner from '../components/Spinner.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faRefresh, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faQuestion, faRefresh } from '@fortawesome/free-solid-svg-icons';
 import { ZoaButton, ZoaModal } from '@nhm-data/zoa';
 import { Bar } from 'vue-chartjs';
 import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
   BarElement,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
   LinearScale,
+  Title,
+  Tooltip,
 } from 'chart.js';
-import { useRoute } from 'vue-router';
 
 ChartJS.register(
   Title,
@@ -108,6 +107,7 @@ const total = ref(0);
 const levelCounts = ref([]);
 const elementCounts = ref([]);
 const loading = ref(true);
+// use the same chart options for both charts (for now)
 const chartOptions = ref({
   indexAxis: 'y',
   scales: {
@@ -124,6 +124,7 @@ const chartOptions = ref({
   },
 });
 
+// colours for the charts
 const bgColours = [
   'rgba(255, 99, 132, 0.2)',
   'rgba(255, 159, 64, 0.2)',
@@ -141,6 +142,9 @@ onMounted(async () => {
   await load();
 });
 
+/**
+ * Load the data needed to render this page from the various APIs we're using.
+ */
 async function load() {
   loading.value = true;
   // load the dataset info first
@@ -149,18 +153,22 @@ async function load() {
   total.value = await getCount(datasetKey);
   // calculate the level counts
   levelCounts.value = await calculateCounts(datasetKey);
-  // calculate per level counts
+  // calculate per element counts
   elementCounts.value = await getPerElementCounts(datasetKey);
   // indicate that loading is complete
   loading.value = false;
 }
 
+/**
+ * Computed value of the MIDS level in plain text.
+ */
 const midsLevel = computed(() => {
-  const threshold = 1;
   let level = -1;
   for (const levelCount of levelCounts.value) {
-    if (levelCount / total.value >= threshold) {
+    if (levelCount === total.value) {
       level += 1;
+    } else {
+      break;
     }
   }
   if (level === -1) {
@@ -170,7 +178,10 @@ const midsLevel = computed(() => {
   }
 });
 
-const chartData = computed(() => {
+/**
+ * Computed value for the per level chart.
+ */
+const levelChartData = computed(() => {
   return {
     labels: ['MIDS 0', 'MIDS 1', 'MIDS 2', 'MIDS 3'],
     datasets: [
@@ -185,7 +196,10 @@ const chartData = computed(() => {
   };
 });
 
-const perElementData = computed(() => {
+/**
+ * Computed value for the per element chart.
+ */
+const elementChartData = computed(() => {
   const labels = [];
   const values = [];
   const bgs = [];
@@ -213,8 +227,6 @@ const perElementData = computed(() => {
     ],
   };
 });
-
-function showHelp() {}
 </script>
 
 <style scoped></style>

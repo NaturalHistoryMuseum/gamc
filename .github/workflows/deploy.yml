@@ -35,6 +35,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      # this is a bit of hack (maybe?) but it ensures our pages work when you go
+      # directly to a non-home URL (i.e. /about)
       - name: Copy index to 404
         run: cp ./dist/index.html ./dist/404.html
       - name: Setup Pages

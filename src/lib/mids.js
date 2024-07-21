@@ -7,6 +7,9 @@ import {
   isTrue,
 } from './gbifPredicates.js';
 
+/**
+ * MIDS level 0 elements
+ */
 export const mids0Elements = {
   // missing:
   // - materialSampleID
@@ -22,13 +25,16 @@ export const mids0Elements = {
   Organization: createBasicOr('INSTITUTION_KEY', 'INSTITUTION_CODE'),
 };
 
+/**
+ * MIDS level 1 elements
+ */
 export const mids1Elements = {
   Name: createBasicOr(
     'SCIENTIFIC_NAME',
     // todo: is this ok for vernacularName? Probably but not?
     'VERBATIM_SCIENTIFIC_NAME',
-    // todo: is this ok for scientificNameID? Seems like this may actually produce a
-    //       search across all taxonomy fields on GBIF's end?
+    // todo: is this ok for scientificNameID? Seems like this may actually
+    //       produce a search across all taxonomy fields on GBIF's end?
     'TAXON_KEY',
     // todo: we don't have organismName but we do have this, is it ok?
     'ORGANISM_ID',
@@ -39,6 +45,9 @@ export const mids1Elements = {
   Modified: exists('MODIFIED'),
 };
 
+/**
+ * MIDS level 2 elements
+ */
 export const mids2Elements = {
   // missing:
   // - county
@@ -78,12 +87,13 @@ export const mids2Elements = {
   // - accessURI
   // - identifier
   // but probably ok because of MEDIA_TYPE I think.
-  // todo: worth using DWCA_EXTENSION is one of Multimedia Audubon multimedia etc
+  // todo: worth using DWCA_EXTENSION is one of Multimedia Audubon multimedia?
   media: exists('MEDIA_TYPE'),
 };
 
-// missing:
-// - AssociatedMediaID
+/**
+ * MIDS level 3 elements
+ */
 export const mids3Elements = {
   // missing:
   // - geodeticDatum
@@ -103,6 +113,14 @@ export const mids3Elements = {
   IdentifiedByID: exists('IDENTIFIED_BY_ID'),
 };
 
+/**
+ * Using the level predicates, queries the GBIF API to calculate the number of
+ * records which meet each MIDS level.
+ *
+ * @param {String} datasetKey the dataset key
+ * @returns {Promise<[Number, Number, Number, Number]>} the record counts at
+ *                                                      each level
+ */
 export async function calculateCounts(datasetKey) {
   const counts = [];
   const predicates = [];
@@ -115,6 +133,15 @@ export async function calculateCounts(datasetKey) {
   return counts;
 }
 
+/**
+ * Returns an array of objects representing each MIDS level, each of which
+ * contains the MIDS elements present at that level and the number of records in
+ * the given dataset which match the predicate defined for the element.
+ *
+ * @param {String} datasetKey the dataset key
+ * @returns {Promise<Object[]>} an array of Objects containing element names as
+ *                              keys and record counts as values
+ */
 export async function getPerElementCounts(datasetKey) {
   const counts = [];
   const levels = [mids0Elements, mids1Elements, mids2Elements, mids3Elements];
