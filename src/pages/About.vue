@@ -106,7 +106,17 @@
             >.
           </li>
         </ul>
-        <p></p>
+      </section>
+      <section class="pt-4 pb-12">
+        <h2 class="text-xl font-bold">Contribute</h2>
+        <p>
+          If you think you've spotted something incorrect or would like to
+          suggest an improvement, please do so on
+          <a href="https://github.com/NaturalHistoryMuseum/gamc/issue"
+            >GitHub</a
+          >
+          by creating an issue or opening a pull request.
+        </p>
       </section>
     </div>
   </article>
