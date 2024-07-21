@@ -5,7 +5,10 @@
     </section>
     <div class="w-2/3 mx-auto">
       <section class="py-4">
-        <h2 class="text-xl font-bold">What is this tool?</h2>
+        <AboutAnchor
+          anchor-id="what-is-this-tool"
+          heading="What is this tool?"
+        ></AboutAnchor>
         <p>
           This is a tool for calculating
           <a href="https://www.tdwg.org/community/cd/mids/">MIDS</a>
@@ -28,7 +31,10 @@
         <p class="italic pt-4 text-sm">*see caveats below</p>
       </section>
       <section class="py-4">
-        <h2 class="text-xl font-bold">What is MIDS?</h2>
+        <AboutAnchor
+          anchor-id="what-is-mids"
+          heading="What is MIDS?"
+        ></AboutAnchor>
         <p>
           MIDS is the Minimum Information about a Digital Specimen, a standard
           under construction by the
@@ -50,7 +56,10 @@
         </p>
       </section>
       <section class="py-4">
-        <h2 class="text-xl font-bold">How does it work?</h2>
+        <AboutAnchor
+          anchor-id="how-does-it-work"
+          heading="How does it work?"
+        ></AboutAnchor>
         <p>
           This tool uses the GBIF API to calculate a MIDS score for a given
           dataset. To do this, the MIDS
@@ -83,7 +92,7 @@
         </div>
       </section>
       <section class="py-4">
-        <h2 class="text-xl font-bold">Caveats!</h2>
+        <AboutAnchor anchor-id="caveats" heading="Caveats!"></AboutAnchor>
         <ul class="list-disc pl-6">
           <li>
             This tool is very much a toy project and once GBIF implement MIDS
@@ -108,7 +117,7 @@
         </ul>
       </section>
       <section class="pt-4 pb-12">
-        <h2 class="text-xl font-bold">Contribute</h2>
+        <AboutAnchor anchor-id="contribute" heading="Contibute"></AboutAnchor>
         <p>
           If you think you've spotted something incorrect or would like to
           suggest an improvement, please do so on
@@ -129,6 +138,7 @@ import {
   mids2Elements,
   mids3Elements,
 } from '../lib/mids.js';
+import AboutAnchor from '../components/AboutAnchor.vue';
 
 const levels = [mids0Elements, mids1Elements, mids2Elements, mids3Elements];
 </script>
