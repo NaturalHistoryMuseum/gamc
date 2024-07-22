@@ -1,10 +1,11 @@
 <template>
   <div class="flex gap-2 items-center w-screen justify-center">
-    <div class="w-1/2 relative mb-40">
+    <div class="w-1/2 relative mb-48">
+      <div class="text-4xl pb-2 border-b-2 mb-4">GBIF API MIDS Calculator</div>
       <input
         class="border-2 rounded-md border-gray-100 p-2 bg-white w-full"
         type="search"
-        placeholder="Choose a GBIF occurrence dataset..."
+        placeholder="Search for a GBIF occurrence dataset to get started..."
         v-model="search"
         ref="searchInput"
         @keydown.down.prevent="highlightNext"
@@ -12,7 +13,7 @@
         @keydown.enter="select(datasets[highlightedIndex])"
         @keydown.esc="search = ''"
       />
-      <ul v-if="datasets.length > 0" class="absolute w-full">
+      <ul v-if="datasets.length > 0" class="absolute w-full bg-white">
         <li
           v-for="(dataset, index) in datasets"
           :key="dataset.key"
@@ -24,6 +25,17 @@
           {{ dataset.label }}
         </li>
       </ul>
+      <div class="pt-10 italic text-md">
+        <a
+          href="https://www.tdwg.org/community/cd/mids/"
+          target="_blank"
+          class="border-r-2 border-black pr-2"
+          >What is MIDS?</a
+        >
+        <RouterLink class="pl-2" :to="{ name: 'about' }"
+          >What is this tool?</RouterLink
+        >
+      </div>
     </div>
   </div>
 </template>
